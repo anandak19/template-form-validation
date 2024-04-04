@@ -1,0 +1,125 @@
+<div class="form-container">
+    <form #f = ngForm (ngSubmit)="f.form.valid && onSubmit()" class="form-container__form">
+        <h1 class="form-container__title">User Registration</h1>
+
+
+        <div class="form-container__form-group">
+            <label for="">Username:</label>
+            <input type="text" class="form-container__form-control" name="username" 
+            [(ngModel)] = "form.userName" required #username = "ngModel" minlength="4" maxlength="15" pattern="[a-zA-Z]*" placeholder="Username"
+            [ngClass]="{'form-container__is-invalid': f.submitted && username.errors}">
+
+            @if(f.submitted && username.errors){
+                <div class="form-container__invalid-feedback">
+                    @if(username.errors['required']){
+                        <div>Username is required</div>
+                    }@if(username.errors['minlength']){
+                        <div>Minimum 4 charecters required</div>
+                    }@if(username.errors['maxlength']){
+                        <div>Maximum charecters allowd is 15</div>
+                    }@if(username.errors['pattern']){
+                        <div>Username must be in alphabetic</div>
+                    }
+                </div>
+            }
+        </div>
+
+
+        <div class="form-container__form-group">
+            <label for="">Email:</label>
+            <input type="email" class="form-container__form-control" name="email" 
+            [(ngModel)]="form.email" required #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="example@gmail.com"
+            [ngClass]="{'form-container__is-invalid': f.submitted && email.errors}">
+
+            @if(f.submitted && email.errors){
+                <div class="form-container__invalid-feedback">
+                    @if(email.errors['required']){
+                        <div>Email is required</div>
+                    }@if(email.errors['pattern']){
+                        <div>Invalid email format</div>
+                    }
+                </div>
+            }
+        </div>
+
+
+        <div class="form-container__form-group">
+            <label for="">Address</label>
+            <input type="text" class="form-container__form-control" name="address" 
+            [(ngModel)] = form.address required #address="ngModel" placeholder="Address"
+            [ngClass]="{'form-container__is-invalid': f.submitted && address.errors}">
+
+            @if(f.submitted && address.errors){
+                <div class="form-container__invalid-feedback">
+                    @if(address.errors['required']){
+                        <div>Address is required</div>
+                    }
+                </div>
+            }
+        </div>
+
+
+        <div class="form-container__form-group">
+            <label for="">Date of Birth</label>
+            <input type="date" class="form-container__form-control" name="dateOfBirth" 
+            [(ngModel)] = form.dateOfBirth required #dateOfBirth="ngModel" pattern="^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$"
+            [ngClass]="{'form-container__is-invalid': f.submitted && dateOfBirth.errors}">
+
+            @if(f.submitted && dateOfBirth.errors){
+                <div class="form-container__invalid-feedback">
+                    @if(dateOfBirth.errors['required']){
+                        <div>Date of Birth is required</div>
+                    }@if(dateOfBirth.errors['pattern']){
+                        <div>Invalid date format</div>
+                    }
+                </div>
+            }
+        </div>
+
+
+        <div class="form-container__form-group">
+            <label for="">Password</label>
+            <input type="password" class="form-container__form-control" name="password" minlength="6" maxlength="10" 
+            [(ngModel)] = form.password required #password="ngModel" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
+            [ngClass]="{'form-container__is-invalid': f.submitted && password.errors}">
+
+            @if(f.submitted && password.errors){
+                <div class="form-container__invalid-feedback">
+                    @if(password.errors['required']){
+                        <div>password is required</div>
+                    }@if(password.errors['minlength']){
+                        <div>Minimum 4 charecters required</div>
+                    }@if(password.errors['maxlength']){
+                        <div>Maximum charecters allowd is 15</div>
+                    }@if(password.errors['pattern']){
+                        <div>Password must contain at least one lowercase letter,<br> one uppercase letter, one digit, and one special character</div>
+                    }
+                </div>
+            }
+        </div>
+
+
+        <div class="form-container__form-group">
+            <label for="">Phone Number</label>
+            <input type="tel" class="form-container__form-control" name="phone" minlength="10" maxlength="14" 
+            [(ngModel)] = form.phone required #phone="ngModel"  pattern="[0-9]+" placeholder="Phone"
+            [ngClass]="{'form-container__is-invalid': f.submitted && phone.errors}">
+
+            @if(f.submitted && phone.errors){
+                <div class="form-container__invalid-feedback">
+                    @if(phone.errors['required']){
+                        <div>phone is required</div>
+                    }@if(phone.errors['pattern']){
+                        <div>Phone number must be numeric</div>
+                    }@if(phone.errors['minlength']){
+                        <div>Minimum length should be 10</div>
+                    }@if(phone.errors['maxlength']){
+                        <div>Maximum charecters allowd is 13</div>
+                    }
+                </div>
+            }
+        </div>
+
+        <button type="submit" class="form-container__submit-btn">Save</button>
+    </form>
+</div>
